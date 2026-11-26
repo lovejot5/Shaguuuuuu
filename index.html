@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf3e3">
+<title>A little birthday world for Shagun ♡</title>
+<style>
+:root{--cream:#fbf5e8;--paper:#fffaf0;--gold:#b58a48;--gold2:#dfc58f;--ink:#59452d;--muted:#8c795e;--pink:#f2dce0;--line:#ead9b9;--shadow:0 22px 65px #765b3218}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,"Times New Roman",serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{touch-action:manipulation}
+.ambient{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(circle at 8% 12%,#fffdf6 0,transparent 32%),radial-gradient(circle at 90% 85%,#ead9b755 0,transparent 35%),linear-gradient(135deg,#fbf6eb,#f5ecd9)}
+.ambient:after{content:"";position:absolute;inset:0;opacity:.12;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
+.orb{position:absolute;width:180px;height:180px;border-radius:50%;background:#e8d3a455;filter:blur(2px);animation:drift 14s ease-in-out infinite}.orb.one{top:12%;left:-100px}.orb.two{right:-120px;bottom:10%;width:240px;height:240px;animation-delay:-6s}@keyframes drift{50%{transform:translate(20px,-25px)}}
+.view{display:none;min-height:100svh}.view.active{display:flex}.center{align-items:center;justify-content:center;padding:26px 17px}
+.login-card,.gate-card{width:min(430px,100%);padding:clamp(25px,7vw,42px);border:1px solid var(--line);border-radius:28px;background:rgba(255,251,241,.96);box-shadow:var(--shadow);text-align:center;position:relative;animation:rise .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.mascot{font-family:system-ui,sans-serif;font-size:3.5rem;line-height:1.2;margin:0 auto 10px;animation:bob 2.5s ease-in-out infinite}.mascot span{display:inline-block;animation:bob 2.5s .3s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-7px) rotate(-3deg)}}
+.eyebrow{font:600 .64rem/1.5 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.script{font-style:italic;color:#a47b42}.login-card h1{font-size:clamp(2.4rem,11vw,3.5rem);font-weight:normal;margin:9px 0;color:#795a32}.copy{font: .9rem/1.75 system-ui,sans-serif;color:var(--muted);margin:0 auto 23px;max-width:300px}
+.field{text-align:left;margin:13px 0}.field label{display:block;font:600 .72rem system-ui,sans-serif;color:#876d49;margin:0 0 7px 4px}.field input{width:100%;height:50px;border:1px solid #e8d9bd;border-radius:13px;background:#fffdf7;padding:0 14px;color:var(--ink);outline:none;font: .9rem system-ui,sans-serif}.field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px #b58a481c}
+.btn{border:1px solid #c49a57;border-radius:99px;background:linear-gradient(135deg,#d8b66f,#b88943);color:white;padding:14px 22px;min-height:49px;cursor:pointer;font:600 .85rem system-ui,sans-serif;box-shadow:0 8px 20px #9b743020;transition:transform .2s,filter .2s}.btn:active{transform:scale(.98)}.btn:disabled{opacity:.45;cursor:not-allowed}.full{width:100%;margin-top:12px}.error{min-height:20px;color:#a35e63;font: .75rem system-ui,sans-serif;margin-top:9px}.tiny{font: .68rem system-ui,sans-serif;color:#a18c6b;margin-top:18px}
+#gate{align-items:center;justify-content:center;padding:20px}.gate-card{max-width:480px}.lock{font:2rem system-ui;margin-bottom:10px}.gate-card h1{font-size:2rem;font-weight:normal;margin:12px 0}.date{font:600 .68rem system-ui;letter-spacing:.16em;color:var(--gold)}.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:22px 0}.unit{background:#fff8e8;border:1px solid var(--line);border-radius:13px;padding:13px 3px}.unit strong{display:block;font-size:clamp(1.4rem,6vw,2rem);color:#98713a}.unit span{font: .52rem system-ui;letter-spacing:.1em;color:var(--muted)}
+#birthday{display:none;min-height:100vh}#birthday.active{display:block}.nav{height:60px;position:sticky;top:0;z-index:8;background:#fbf5e8ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(17px,calc((100vw - 900px)/2))}.brand{font-style:italic;font-size:1.5rem;color:#98713a}.nav small{font: .58rem system-ui;letter-spacing:.13em;color:#947c59}.admin-label{display:none;color:#a16e48;font-weight:700}.admin-preview .admin-label{display:inline}
+.hero{min-height:78svh;display:grid;place-items:center;text-align:center;padding:65px 18px;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#fffdf6 0,#fbf3e3 72%,#f1e4cc 100%)}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #dfc58f;border-radius:50%;width:min(75vw,560px);aspect-ratio:1;opacity:.35}.hero:after{width:min(90vw,680px);opacity:.2}
+.hero-inner{position:relative;z-index:1;max-width:650px}.hero .mascot{font-size:4.2rem}.hero h1{font-size:clamp(3.2rem,13vw,6.5rem);line-height:1;margin:18px 0;color:#76552e;font-weight:normal}.hero h1 em{color:#b58a48}.hero p{font: .94rem/1.8 system-ui,sans-serif;color:#887455;max-width:410px;margin:15px auto 24px}
+section{padding:65px 17px}.wrap{width:min(850px,100%);margin:auto}.section-head{text-align:center;margin:0 auto 28px;max-width:550px}.section-head .script{font-size:1.7rem}.section-head h2{font-size:clamp(1.8rem,7vw,2.5rem);font-weight:normal;color:#76552e;margin:7px 0}.section-head p{font: .83rem/1.7 system-ui,sans-serif;color:var(--muted);margin:0}
+.party-section{background:rgba(255,251,241,.62)}.game-card{max-width:730px;margin:auto;padding:clamp(14px,3vw,25px);background:linear-gradient(145deg,#fffdf7,#f9efdE);border:1px solid #e7d5b2;border-radius:25px;box-shadow:var(--shadow)}
+.game-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.chip{font:600 .57rem system-ui;letter-spacing:.13em;color:#94713d;border:1px solid #e6d4b0;background:#fffaf0;border-radius:99px;padding:8px 11px}
+.score-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}.score{border:1px solid #eadcbe;background:#fffaf0;border-radius:14px;text-align:center;padding:10px}.score small{display:block;font: .56rem system-ui;letter-spacing:.1em;color:#9a8058}.score strong{font-size:1.6rem;color:#805f34}
+.game-message{min-height:48px;text-align:center;font: .83rem/1.6 system-ui,sans-serif;color:#826e50;padding:8px 3px}
+.balloon-field{position:relative;overflow:hidden;border:1px solid #ead8bc;border-radius:19px;padding:24px 12px 15px;background:radial-gradient(circle at 50% 0,#fffdf9,transparent 65%),linear-gradient(#fff8ed,#f6e7d6)}
+.garland{text-align:center;color:#c49a62;letter-spacing:.3em;font-size:1.1rem;margin-bottom:15px;animation:sway 4s ease-in-out infinite}@keyframes sway{50%{transform:rotate(1deg)}}
+.balloon-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px 9px;max-width:540px;margin:auto;justify-items:center}
+.balloon{position:relative;width:clamp(47px,10vw,67px);height:clamp(60px,12vw,82px);border:1px solid #ffffffa8;border-radius:50% 50% 47% 47%;display:grid;place-items:center;box-shadow:inset -8px -8px 12px #8b66501a,inset 7px 8px 12px #ffffffb0,0 6px 12px #8b66501a;cursor:pointer;animation:floatBalloon 2.3s ease-in-out infinite;animation-delay:var(--delay,0ms);transition:filter .2s}
+.balloon:before{content:"";position:absolute;left:16%;top:14%;width:16%;height:25%;border-radius:50%;background:#ffffff9c;transform:rotate(25deg)}.balloon:after{content:"";position:absolute;bottom:-8px;width:10px;height:9px;background:inherit;clip-path:polygon(0 0,100% 0,50% 100%)}
+.balloon span{font:1.2rem system-ui;color:#fff;text-shadow:0 1px 4px #876c5b55}
+.balloon.c1{background:linear-gradient(145deg,#fff0b8,#eac66d)}.balloon.c2{background:linear-gradient(145deg,#ffdce0,#e9a9b7)}.balloon.c3{background:linear-gradient(145deg,#eadfff,#c8b1e6)}.balloon.c4{background:linear-gradient(145deg,#dff2df,#a9d1b0)}.balloon.c5{background:linear-gradient(145deg,#ffe2ca,#efb79b)}.balloon.c6{background:linear-gradient(145deg,#dceffc,#a8cde3)}
+@keyframes floatBalloon{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+.balloon.popped{animation:pop .3s ease forwards;pointer-events:none}@keyframes pop{35%{transform:scale(1.25);filter:brightness(1.2)}100%{transform:scale(.05);opacity:0}}
+.party-bottom{display:flex;justify-content:center;gap:12px;align-items:center;font:2.2rem system-ui;margin:12px 0 0}.party-bottom span{animation:bob 2.2s ease-in-out infinite}.party-bottom span+span{animation-delay:.3s}
+.game-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:15px 0}.secondary{border:1px solid #dec99f;background:#fffaf0;color:#8b6a39;border-radius:99px;padding:12px 18px;font: .8rem system-ui;cursor:pointer}.progress{height:7px;background:#eadfc9;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e0c47f,#b88943);transition:width .25s}.progress-text{text-align:center;font: .7rem system-ui;color:#967d58;margin-top:8px}
+.game-prize{display:flex;align-items:center;gap:12px;margin-top:16px;padding:13px 15px;border:1px dashed #d9bd83;border-radius:15px;background:#fff9eb;font: .78rem/1.55 system-ui;color:#80633d}.game-prize .prize-icon{font-size:1.8rem}.game-prize strong{font-family:Georgia,serif;font-size:1rem}.game-prize p{margin:3px 0 0}.game-prize.won{background:#fff0d4;animation:prizeIn .5s ease}@keyframes prizeIn{from{transform:scale(.96);opacity:.5}to{transform:scale(1);opacity:1}}
+.letter-section{background:linear-gradient(140deg,#f4e9d9,#f8f0e5)}.letter-wrap{max-width:720px;margin:auto;position:relative;padding:8px}
+.letter{position:relative;padding:clamp(30px,6vw,58px);background-color:#f7efd9;background-image:radial-gradient(ellipse at 12% 8%,#ffffffb8,transparent 36%),radial-gradient(ellipse at 88% 92%,#b491531f,transparent 42%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E"),linear-gradient(135deg,#fbf5e5,#f2e6c9 52%,#f8f0dc);background-blend-mode:normal,normal,multiply,normal;border:1px solid #ddc99e;box-shadow:0 4px 8px #60451b12,0 20px 45px #60451b18;transform:rotate(-.25deg)}
+.letter:before{content:"";position:absolute;inset:12px;border:1px solid #b1915855;pointer-events:none}.letter .letter-top{font:italic 1.8rem Georgia,serif;color:#a47b42}.letter h3{font:normal 1.5rem Georgia,serif;color:#76552e;margin:12px 0 19px}.letter p{font: .95rem/2 Georgia,serif;color:#604d35;white-space:pre-line;position:relative}.signature{text-align:right;font:italic 2rem cursive;color:#9b743e;margin-top:22px}.rose-stamp{position:absolute;right:-5px;top:-28px;font-size:3.4rem;filter:drop-shadow(0 5px 4px #765b3230);transform:rotate(12deg)}
+.final{padding:75px 18px;text-align:center;background:radial-gradient(ellipse at center,#fffdf6,#f4e8d7)}.final h2{font-size:clamp(2rem,8vw,3.4rem);font-weight:normal;color:#76552e;margin:12px 0}.final p{font: .88rem/1.8 system-ui,sans-serif;color:#8c795e}.final .heart{color:#bd8290;animation:heartbeat 1.2s infinite;display:inline-block}@keyframes heartbeat{50%{transform:scale(1.25)}}footer{text-align:center;padding:22px;font: .62rem system-ui;letter-spacing:.15em;color:#a18a6b}
+#surprise{display:none;position:fixed;inset:0;z-index:30;background:#fff9eef0;backdrop-filter:blur(8px);place-items:center;padding:18px;text-align:center}#surprise.show{display:grid}.surprise-card{width:min(440px,100%);padding:30px 23px;border:1px solid var(--line);border-radius:25px;background:#fffdf7;box-shadow:var(--shadow)}.surprise-card h2{font-size:2rem;font-weight:normal;color:#76552e}.surprise-card p{font: .88rem/1.8 system-ui,sans-serif;color:var(--muted)}
+@media(max-width:640px){.nav{padding:0 14px}.nav small{font-size:.49rem}.hero{min-height:76svh;padding:55px 16px}.hero .mascot{font-size:3.6rem}section{padding:52px 13px}.game-card{padding:12px;border-radius:20px}.game-top{gap:6px}.chip{font-size:.49rem;padding:7px 8px}.score{padding:8px 3px}.score small{font-size:.49rem}.score strong{font-size:1.35rem}.balloon-field{padding:20px 8px 12px}.balloon-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 5px}.balloon{width:clamp(48px,14vw,62px);height:clamp(61px,17vw,76px)}.letter{padding:30px 24px}.letter:before{inset:9px}.rose-stamp{right:0;font-size:2.8rem}.timer{gap:5px}.unit{padding:12px 2px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><i class="orb one"></i><i class="orb two"></i></div>
+
+<main id="login" class="view center active">
+ <form class="login-card" id="loginForm">
+  <div class="mascot" aria-hidden="true">🧸 <span>🐰</span></div>
+  <div class="eyebrow">a little secret place</div>
+  <h1>Just for you</h1>
+  <p class="copy">A tiny birthday world is waiting behind this door. Only the right person knows the way in.</p>
+  <div class="field"><label for="username">Username</label><input id="username" autocomplete="username" placeholder="Your special name" required></div>
+  <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="A little secret" required></div>
+  <button class="btn full" type="submit">Unlock the little door ♡</button>
+  <div class="error" id="loginError" aria-live="polite"></div>
+  <div class="tiny">made with a little love, just for Shagun</div>
+ </form>
+</main>
+
+<main id="gate" class="view center">
+ <div class="gate-card">
+  <div class="lock">🔒</div><div class="eyebrow">the surprise is waiting</div>
+  <h1 id="gateTitle">Not quite yet, birthday girl</h1>
+  <p class="copy" id="gateSub">Your little world unlocks at midnight on your birthday.</p>
+  <div class="date">4 DECEMBER 2026 · 12:00 AM IST</div>
+  <div class="timer"><div class="unit"><strong id="days">000</strong><span>Days</span></div><div class="unit"><strong id="hours">00</strong><span>Hours</span></div><div class="unit"><strong id="minutes">00</strong><span>Minutes</span></div><div class="unit"><strong id="seconds">00</strong><span>Seconds</span></div></div>
+  <button class="btn full" id="continueBtn" disabled>Continue ♡</button>
+  <p class="tiny" id="gateFoot">A little patience makes a lovely surprise.</p>
+ </div>
+</main>
+
+<div id="birthday">
+ <nav class="nav"><div class="brand">for Shagun ♡</div><small><span class="admin-label">ADMIN PREVIEW · </span>MADE WITH LOVE</small></nav>
+ <header class="hero"><div class="hero-inner"><div class="mascot" aria-hidden="true">🧸 <span>🐰</span></div><div class="eyebrow">today is all about you</div><h1>Happy Birthday,<br><em>Shagun!</em></h1><p>A little world filled with soft colours, tiny surprises and all the happiness you deserve.</p><button class="btn" onclick="document.getElementById('party').scrollIntoView({behavior:'smooth'})">Let's celebrate ♡</button></div></header>
+
+ <section class="party-section" id="party">
+  <div class="wrap">
+   <div class="section-head"><div class="script">a little party, just for you</div><h2>Balloon Pop Party!</h2><p>Pop all 20 balloons, collect happy little messages and unlock your birthday celebration.</p></div>
+   <div class="game-card">
+    <div class="game-top"><span class="chip">♡ BUGU DUGU PARTY CLUB</span><span class="chip">20 BALLOONS · NO TIMER</span></div>
+    <div class="score-row"><div class="score"><small>BALLOONS POPPED</small><strong id="score">00 / 20</strong></div><div class="score"><small>PARTY MOOD</small><strong id="mood">🥳</strong></div></div>
+    <div class="game-message" id="gameMessage" aria-live="polite">Tap “Start the party” and pop the balloons. Every pop brings a little happiness! ♡</div>
+    <div class="balloon-field"><div class="garland">✦　♡　✧　♡　✦</div><div class="balloon-grid" id="balloonGrid"></div><div class="party-bottom" aria-hidden="true"><span>🧸</span><span>🐰</span><span>💗</span></div></div>
+    <div class="game-actions"><button class="btn" id="startGame" type="button">Start the party ♡</button><button class="secondary" id="resetGame" type="button" disabled>↻ Play again</button></div>
+    <div class="progress"><i id="progressFill"></i></div><div class="progress-text" id="progressText">20 happy pops until your surprise!</div>
+    <div class="game-prize" id="prize"><span class="prize-icon">🎁</span><div><strong>Your surprise is waiting</strong><p>Pop all the balloons to reveal your birthday wish.</p></div></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="letter-section" id="letter">
+  <div class="wrap"><div class="section-head"><div class="script">sealed with love</div><h2>A little letter for you</h2></div>
+   <div class="letter-wrap"><div class="rose-stamp" aria-hidden="true">🌹</div><article class="letter">
+    <div class="letter-top">My dearest Shagun,</div>
+    <h3>A note on your special day</h3>
+    <p>Some people make the world feel a little softer just by being in it. You are one of those people.
+
+I hope this new year of your life brings you gentle mornings, unexpected laughter, beautiful opportunities and countless reasons to smile.
+
+Never forget how special you are. You deserve kindness, peace, love and every lovely thing your heart wishes for.
+
+I may not have a perfect gift for you, but I wanted to make you a tiny place where you can feel celebrated, today and whenever you need a smile.
+
+Happy Birthday, meri jaan. Keep shining, always. ♡</p>
+    <div class="signature">Always yours, Lovejot ♡</div>
+   </article></div>
+  </div>
+ </section>
+
+ <section class="final"><div class="script" style="font-size:2rem">one last little thing</div><h2>You make life sweeter.</h2><p>Thank you for being exactly who you are.<br>May your days be as lovely as your heart.</p><button class="btn" onclick="openSurprise()">Open your final surprise ♡</button><p style="margin-top:24px"><span class="heart">♥</span></p></section>
+ <footer>MADE WITH A LITTLE LOVE · JUST FOR SHAGUN</footer>
+</div>
+
+<div id="surprise" role="dialog" aria-modal="true" aria-labelledby="surpriseTitle"><div class="surprise-card"><div class="script">a wish for you</div><h2 id="surpriseTitle">Keep shining, Shagun.</h2><p>If I could wrap up all the good things in the world and give them to you, I would. Until then, here's a little reminder: you are loved, you are precious, and you deserve beautiful things.</p><div class="script" style="font-size:1.8rem;margin:15px">Happy Birthday ♡</div><button class="secondary" onclick="closeSurprise()">Close with a smile</button></div></div>
+
+<script>
+"use strict";
+const unlockAt = new Date("2026-12-04T00:00:00+05:30");
+const views = ["login","gate","birthday"].map(id => document.getElementById(id));
+function showView(id){views.forEach(v=>v.classList.toggle("active",v.id===id));window.scrollTo(0,0)}
+function birthdayUnlocked(){return Date.now()>=unlockAt.getTime()}
+let countdownInterval;
+function startCountdown(){
+ clearInterval(countdownInterval);
+ const tick=()=>{
+  const diff=unlockAt.getTime()-Date.now();
+  if(diff<=0){
+   ["days","hours","minutes","seconds"].forEach(id=>document.getElementById(id).textContent="00");
+   document.getElementById("gateTitle").textContent="Your day is here, Shagun!";
+   document.getElementById("gateSub").textContent="The little world is unwrapped. Your birthday surprise is ready.";
+   document.getElementById("gateFoot").textContent="The door is open. Happy Birthday!";
+   document.getElementById("continueBtn").disabled=false;
+   clearInterval(countdownInterval);return;
+  }
+  const vals={days:Math.floor(diff/86400000),hours:Math.floor(diff%86400000/3600000),minutes:Math.floor(diff%3600000/60000),seconds:Math.floor(diff%60000/1000)};
+  Object.entries(vals).forEach(([id,n])=>document.getElementById(id).textContent=String(n).padStart(id==="days"?3:2,"0"));
+ };
+ tick();countdownInterval=setInterval(tick,1000);
+}
+document.getElementById("loginForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const user=document.getElementById("username").value.trim().toLowerCase();
+ const pass=document.getElementById("password").value;
+ const error=document.getElementById("loginError");
+ error.textContent="";
+ if(user==="lovejot"&&pass==="lovejot"){document.body.classList.add("admin-preview");showView("birthday");}
+ else if(user==="shagun"&&pass==="huihui"){document.body.classList.remove("admin-preview");if(birthdayUnlocked())showView("birthday");else{showView("gate");startCountdown();}}
+ else error.textContent="That doesn't look quite right. Please try again ♡";
+});
+document.getElementById("continueBtn").addEventListener("click",()=>{if(!document.getElementById("continueBtn").disabled)showView("birthday")});
+
+const balloonGrid=document.getElementById("balloonGrid");
+const scoreEl=document.getElementById("score"), moodEl=document.getElementById("mood");
+const messageEl=document.getElementById("gameMessage"), startBtn=document.getElementById("startGame"), resetBtn=document.getElementById("resetGame");
+const progressFill=document.getElementById("progressFill"),progressText=document.getElementById("progressText"),prize=document.getElementById("prize");
+const colors=["c1","c2","c3","c4","c5","c6"],icons=["♡","♥","✦","✿"];
+const notes=["A big squishy hug, delivered just for you! ♡","You make ordinary days feel like a fairytale.","A pocketful of sunshine is coming your way! ☀","Your smile is everyone's favourite magic.","A tiny reminder: you are so very loved.","May all your sweetest wishes come true! ✨","You deserve the prettiest things in life.","One more balloon, one more reason to smile!"];
+let popped=0,playing=false,best=0;
+try{best=Number(localStorage.getItem("shagunBalloonBest")||0)}catch(e){}
+function renderBalloons(){
+ balloonGrid.innerHTML="";
+ for(let i=0;i<20;i++){
+  const b=document.createElement("button");b.type="button";b.className="balloon "+colors[i%colors.length];b.disabled=true;
+  b.setAttribute("aria-label","Balloon "+(i+1));
+  const icon=document.createElement("span");icon.textContent=icons[i%icons.length];b.appendChild(icon);
+  b.addEventListener("click",()=>popBalloon(b,i));balloonGrid.appendChild(b);
+ }
+}
+function updateGame(){
+ scoreEl.textContent=String(popped).padStart(2,"0")+" / 20";
+ moodEl.textContent=popped>=16?"🤩":popped>=9?"🥰":popped?"😊":"🥳";
+ progressFill.style.width=(popped*5)+"%";
+ progressText.textContent=popped===20?"All 20 balloons popped! Birthday magic unlocked!":`${20-popped} happy pops until your surprise!`;
+}
+function startParty(){
+ popped=0;playing=true;renderBalloons();
+ [...balloonGrid.children].forEach((b,i)=>{b.disabled=false;b.style.setProperty("--delay",(i%5)*65+"ms")});
+ startBtn.disabled=true;startBtn.textContent="Pop the balloons! ♡";resetBtn.disabled=false;
+ messageEl.textContent="Yay! The party has started. Tap any balloon! ♡";
+ prize.classList.remove("won");prize.innerHTML="<span class='prize-icon'>🎀</span><div><strong>You're doing amazing!</strong><p>Keep popping, birthday girl.</p></div>";
+ updateGame();
+}
+function popBalloon(balloon,index){
+ if(!playing||balloon.disabled)return;
+ balloon.disabled=true;balloon.classList.add("popped");popped++;updateGame();
+ messageEl.textContent=popped%4===0?notes[(popped/4-1)%notes.length]:["Pop! A little burst of happiness! ♡","Yay! Keep going! ✨","That one was full of sunshine! ☀","Another smile unlocked! 💛"][index%4];
+ const burst=document.createElement("span");burst.className="balloon-pop-burst";burst.textContent="✦";
+ const r=balloon.getBoundingClientRect(),host=balloonGrid.getBoundingClientRect();burst.style.left=(r.left-host.left+r.width/2)+"px";burst.style.top=(r.top-host.top+r.height/2)+"px";balloonGrid.appendChild(burst);setTimeout(()=>burst.remove(),800);
+ if(popped===20)finishParty();
+}
+function finishParty(){
+ playing=false;best=Math.max(best,popped);
+ try{localStorage.setItem("shagunBalloonBest",String(best))}catch(e){}
+ messageEl.textContent="YOU DID IT, SHAGUN! All 20 balloons are popped! 🎉";
+ prize.innerHTML="<span class='prize-icon'>🎂</span><div><strong>You're the star of this party!</strong><p>20 balloons, 20 little celebrations, and a million reasons to smile. Happy Birthday, Shagun! ♡</p></div>";
+ prize.classList.add("won");startBtn.disabled=false;startBtn.textContent="Celebrate again ♡";resetBtn.disabled=false;petalShower();
+}
+startBtn.addEventListener("click",startParty);resetBtn.addEventListener("click",startParty);
+renderBalloons();updateGame();
+function openSurprise(){document.getElementById("surprise").classList.add("show");petalShower()}
+function closeSurprise(){document.getElementById("surprise").classList.remove("show")}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSurprise()});
+function petalShower(){
+ for(let i=0;i<32;i++){
+  const p=document.createElement("span");p.textContent=["✿","♡","❀","✦"][i%4];
+  p.style.cssText=`position:fixed;z-index:40;left:${Math.random()*100}vw;top:-25px;color:${["#d99aa8","#c98796","#e9bdc4","#c9a45e"][i%4]};font-size:${12+Math.random()*15}px;pointer-events:none`;
+  document.body.appendChild(p);
+  const anim=p.animate([{transform:"translateY(0) rotate(0)",opacity:1},{transform:`translateY(${innerHeight+70}px) rotate(${Math.random()*360}deg)`,opacity:0}],{duration:2600+Math.random()*1300,easing:"ease-in"});
+  anim.onfinish=()=>p.remove();
+ }
+}
+</script>
+</body>
+</html>
